@@ -32,3 +32,7 @@ let getHumanChoice = () => {
     //return user choice
     return userChoice;
 }
+
+//write variables to keep track of the players score.
+let humanScore = 0;
+let computerScore = 0;
