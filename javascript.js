@@ -1,5 +1,12 @@
 
 
+//function to play 5 rounds
+
+function playGame () {
+    //write variables to keep track of the players score.
+    let humanScore = 0;
+    let computerScore = 0;
+
 //function that randomly returns “rock”, “paper” or “scissors”.
 
 let getComputerChoice = () => {
@@ -33,23 +40,19 @@ let getHumanChoice = () => {
     return userChoice;
 }
 
-//write variables to keep track of the players score.
-let humanScore = 0;
-let computerScore = 0;
-
 //function to play a single round
 
-let playRound = (humanChoice,computerChoice) => {
+    let playRound = (humanChoice,computerChoice) => {
     //function’s humanChoice parameter case-insensitive
-    humanChoice = humanChoice.toLowerCase();
+        humanChoice = humanChoice.toLowerCase();
 
     //convert choices to numbers
-    let humanNum =(humanChoice === "rock") ? 0 
-    : (humanChoice === "paper") ? 1
-    : 2;
-    let computerNum =(computerChoice === "rock") ? 0 
-    : (computerChoice === "paper") ? 1
-    : 2;
+        let humanNum =(humanChoice === "rock") ? 0 
+                    : (humanChoice === "paper") ? 1
+                    : 2;
+        let computerNum =(computerChoice === "rock") ? 0 
+                    : (computerChoice === "paper") ? 1
+                    : 2;
 
     //BEGIN IN CONDITIONALS
 
@@ -89,9 +92,17 @@ let playRound = (humanChoice,computerChoice) => {
         console.log(`It's a Draw: You both drew ${humanChoice}`)
     }
 }
+    playRound(getHumanChoice(),getComputerChoice());
+    playRound(getHumanChoice(),getComputerChoice());
+    playRound(getHumanChoice(),getComputerChoice());
+    playRound(getHumanChoice(),getComputerChoice());
+    playRound(getHumanChoice(),getComputerChoice());
 
-
-
-for (i=0; i <=5; i++) {
-playRound(getHumanChoice(),getComputerChoice());
+    console.log(`${(humanScore > computerScore) ? 
+        "You Win" : (humanScore < computerScore) ?
+        "You Lose": "It's a Daw: Decide Again"
+    } Final Score: Player (${humanScore}), Computer (${computerScore})`)
+    
 }
+
+playGame();
