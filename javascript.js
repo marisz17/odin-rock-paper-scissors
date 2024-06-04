@@ -6,6 +6,9 @@ function playGame() {
     //write variables to keep track of the players score.
     let humanScore = 0;
     let computerScore = 0;
+    let playCount = 0;
+    let para = "";
+    let scorePara = `SCORE! Human (${humanScore}) Computer (${computerScore})`
 
     //function that randomly returns “rock”, “paper” or “scissors”.
 
@@ -30,21 +33,10 @@ function playGame() {
         }
     }
 
-    //function that takes the user choice and returns it.
-
-    let getHumanChoice = () => {
-        //prompt user choice
-        let userChoice = prompt("'rock', 'paper' or 'scissors'?")
-
-        //return user choice
-        return userChoice;
-    }
-
     //function to play a single round
 
     let playRound = (humanChoice, computerChoice) => {
         //function’s humanChoice parameter case-insensitive
-        humanChoice = humanChoice.toLowerCase();
 
         //convert choices to numbers
         let humanNum = (humanChoice === "rock") ? 0
@@ -64,14 +56,16 @@ function playGame() {
                 // human wins
                 case 0:
                     ++humanScore;
-                    console.log(`You Win! ${humanChoice} beats ${computerChoice}`);
+                    ++playCount;
+                    para = `You Win! ${humanChoice} beats ${computerChoice}`;
                     break;
 
                 // when human drew scissors and computer drew rock
                 // human loses
                 case 2:
                     ++computerScore;
-                    console.log(`You Lose! ${computerChoice} beats ${humanChoice}`);
+                    ++playCount;
+                    para = `You Lose! ${computerChoice} beats ${humanChoice}`;
                     break;
 
             }
@@ -80,25 +74,66 @@ function playGame() {
             //human wins has a greater number
         } else if (humanNum > computerNum) {
             ++humanScore;
-            console.log(`You Win! ${humanChoice} beats ${computerChoice}`);
+            ++playCount;
+            para = `You Win! ${humanChoice} beats ${computerChoice}`;
 
             //computer wins has greater number    
         } else if (humanNum < computerNum) {
             ++computerScore;
-            console.log(`You Lose! ${computerChoice} beats ${humanChoice}`);
+            ++playCount;
+            para = `You Lose! ${computerChoice} beats ${humanChoice}`;
 
             // draw equal numbers
         } else {
-            console.log(`It's a Draw: You both drew ${humanChoice}`)
+            ++playCount;
+            para = `It's a Draw: You both drew ${humanChoice}`;
         }
-    }
-    playRound(getHumanChoice(), getComputerChoice());
 
-    console.log(`${(humanScore > computerScore) ?
-        "You Win" : (humanScore < computerScore) ?
-            "You Lose" : "It's a Daw: Decide Again"
-        } Final Score: Player (${humanScore}), Computer (${computerScore})`)
+    let scoreDiv = document.querySelector("#result")
+    scoreDiv.textContent = para;
+    
+    let scoreResults = document.querySelector("#scores")
+
+    if (playCount < 5) {
+        scoreResults.textContent = `SCORE! Human (${humanScore}) Computer (${computerScore})`;
+    } else if (playCount === 5) {
+        if (humanScore > computerScore) {
+            scoreResults.textContent = `You Win! Human(${humanScore}) Computer(${computerScore})`;
+        } else if (humanScore < computerScore) {
+            scoreResults.textContent = `You Lose! Human(${humanScore}) Computer(${computerScore})`;
+        } else {scoreResults.textContent = `It's a draw! Decide Again`;}
+
+        computerScore = 0;
+        humanScore = 0;
+        playCount = 0;
+    }
+
+    }
+//
+    let userChoice = document.querySelector("#buttons")
+
+        userChoice.addEventListener("click", (event) => {
+            let target = event.target
+
+            switch (target.id) {
+                case "btnRock": 
+                        playRound("rock",getComputerChoice());
+                        break;
+
+                case "btnPaper":
+                        playRound("paper",getComputerChoice());
+                        break;
+                
+                case "btnScissors":
+                        playRound("scissors",getComputerChoice());
+                        break;
+            }
+        })
+
+    
 
 }
+
+    
 
 playGame();
