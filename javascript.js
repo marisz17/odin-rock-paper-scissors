@@ -93,10 +93,6 @@ function playGame() {
         }
     }
     playRound(getHumanChoice(), getComputerChoice());
-    playRound(getHumanChoice(), getComputerChoice());
-    playRound(getHumanChoice(), getComputerChoice());
-    playRound(getHumanChoice(), getComputerChoice());
-    playRound(getHumanChoice(), getComputerChoice());
 
     console.log(`${(humanScore > computerScore) ?
         "You Win" : (humanScore < computerScore) ?
